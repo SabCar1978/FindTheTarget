@@ -50,7 +50,8 @@ namespace ConsoleApp1
                 // Setten op de console van 10x10 tabel van streepjes.
                 // Als de target niet gevonden werd dan wordt bij elke doorgang van de while-loop
                 // een streepje vervangen door een X.
-                Console.WriteLine(randomRow + " " + randomCol);
+                Console.WriteLine("(Controle of programma met randomgetallen werkt: Rij= " + randomRow + "  Kolom= " + randomCol+")");
+                Console.WriteLine();
                 for (int i = 0; i < game.GetLength(0); i++)
                 {
                     for (int j = 0; j < game.GetLength(1); j++)
@@ -121,6 +122,7 @@ namespace ConsoleApp1
                     targetFound = false;
                     game[row, col] = 'X';
                 }
+                Console.Clear();
             }
             Console.ReadLine();
         }
