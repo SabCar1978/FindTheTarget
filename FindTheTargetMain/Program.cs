@@ -20,7 +20,7 @@ namespace ConsoleApp1
             int randomCol = 0;
             char[,] game = new char[10, 10];
 
-
+            Console.Title = "FIND THE TARGET!";
             Console.WriteLine(new String('=', 16));
             Console.WriteLine("Find the target!");
             Console.WriteLine(new String('=', 16));
@@ -50,7 +50,8 @@ namespace ConsoleApp1
                 // Setten op de console van 10x10 tabel van streepjes.
                 // Als de target niet gevonden werd dan wordt bij elke doorgang van de while-loop
                 // een streepje vervangen door een X.
-                Console.WriteLine("(Controle of programma met randomgetallen werkt: Rij= " + randomRow + "  Kolom= " + randomCol+")");
+                //Controle of programma werkt: oplossing coördinaten waar target zich bevindt --> activeer/desactiveer regel hieronder
+                Console.WriteLine("((Controle of programma met randomgetallen werkt: Rij= " + randomRow + "  Kolom= " + randomCol + "))");
                 Console.WriteLine();
                 for (int i = 0; i < game.GetLength(0); i++)
                 {
@@ -62,44 +63,51 @@ namespace ConsoleApp1
                 Console.WriteLine();
                 Console.WriteLine();
                 //Aan de speler een getal tussen 0 en 9 vragen voor de coördinaat van de rij
-                Console.WriteLine("Input a digit 0-9 for the column:");
+                Console.WriteLine("Input a digit <0-9> for the row:");
                 //Opvangen foutieve input
                 while (!int.TryParse(Console.ReadLine(), out row))
                 {
-                    Console.WriteLine("Error in input!\nInput a digit 0-9 for the row:");
+                    Console.WriteLine("Error in input!\nInput a digit <0-9> for the row:");
+                }
+                while (row >= 10)
+                {
+                    //Aan de speler een getal tussen 0 en 9 vragen voor de coördinaat van de rij
+                    Console.WriteLine("Error! Input must be a digit from 0 to 9 for the row:");
+                    //Opvangen foutieve input
+                    while (!int.TryParse(Console.ReadLine(), out row))
+                    {
+                        Console.WriteLine("Error in input!\nInput a digit <0-9> for the row:");
+                    }
                 }
                 //Aan de speler een getal tussen 0 en 9 vragen voor de coördinaat van de kolom
-                Console.WriteLine("Input a digit 0-9 for the column:");
+                Console.WriteLine("Input a digit <0-9> for the column:");
                 //Opvangen foutieve input
                 while (!int.TryParse(Console.ReadLine(), out col))
                 {
-                    Console.WriteLine("Error in input!\nInput a digit 0-9 for the column:");
+                    Console.WriteLine("Error in input!\nInput a digit <0-9> for the column:");
                 }
-                while (row > 10 || col > 10)
+                while (col >= 10)
                 {
 
-                    Console.WriteLine("Input a digit 0-9 for the row:");
-                    while (!int.TryParse(Console.ReadLine(), out row))
-                    {
-                        Console.WriteLine("Error in input!\nInput a digit 0-9 for the row:");
-                    }
                     //Aan de speler een getal tussen 0 en 9 vragen voor de coördinaat van de kolom
-                    Console.WriteLine("Input a digit 0-9 for the column:");
+                    Console.WriteLine("Error! Input must be a digit from 0 to 9 for the column:");
                     //Opvangen foutieve input
                     while (!int.TryParse(Console.ReadLine(), out col))
                     {
-                        Console.WriteLine("Error in input!\nInput a digit 0-9 for the column:");
+                        Console.WriteLine("Error in input!\nInput a digit <0-9> for the column:");
                     }
                 }
                 Console.WriteLine();
                 // Ingevoerde cöordinaten vergelijken met coördinaten van de te zoeken target              
                 if (row == randomRow && col == randomCol)
                 {
-                    Console.WriteLine("Target found! Druk <enter> om opnieuw te spelen type e om af te sluiten");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("TARGET FOUND! Druk <enter> om opnieuw te spelen OF druk <E> om af te sluiten");
                     ConsoleKeyInfo exit = Console.ReadKey();
                     if (exit.Key == ConsoleKey.E)
                     {
                         sluitProgramma = true;
+                        Environment.Exit(0);
                     }
                     else
                     {
